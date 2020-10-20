@@ -1,0 +1,102 @@
+<div class="row">
+
+    <div class="col-md-3">
+        <label>Primer argumento</label>
+        <div cdkDropList 
+            #formulaListPrimer="cdkDropList"
+            cdkDropListOrientation="horizontal" 
+            class="example-list-h" 
+            [cdkDropListData]="primerArgumento"
+            (cdkDropListDropped)="drop($event)">
+
+            <div class="example-box-h" *ngFor="let argumento of primerArgumento" cdkDrag>{{ argumento.value }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label>Operación</label>
+        <div cdkDropList 
+            #formulaListOperacion="cdkDropList"
+            cdkDropListOrientation="horizontal" 
+            class="example-list-h" 
+            [cdkDropListData]="operacion"
+            (cdkDropListDropped)="drop($event)">
+
+            <div class="example-box-h" *ngFor="let argumento of operacion" cdkDrag>{{ argumento.value }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label>Segundo argumento</label>
+        <div cdkDropList 
+            #formulaListSegundo="cdkDropList"
+            cdkDropListOrientation="horizontal" 
+            class="example-list-h" 
+            [cdkDropListData]="segundoArgumento"
+            (cdkDropListDropped)="drop($event)">
+
+            <div class="example-box-h" *ngFor="let argumento of segundoArgumento" cdkDrag>{{ argumento.value }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label>Resultado</label>
+        <div cdkDropList 
+            #formulaList="cdkDropList"
+            cdkDropListOrientation="horizontal" 
+            class="example-list-h" 
+            [cdkDropListData]="formula"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box-h" [cdkDragDisabled]="true" cdkDrag>{{ result }}</div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3">
+        <div class="example-container">
+            <h2>Lista</h2>        
+            <div
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="firstList"
+              [cdkDropListConnectedTo]="[formulaListPrimer]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+                <div class="example-box" 
+                     *ngFor="let item of firstList" 
+                     cdkDrag
+                     [cdkDragDisabled]="item.disabled">{{ item.value }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3">
+        <h2>Operación</h2>
+        <div cdkDropList
+             #operacionesList="cdkDropList"
+             [cdkDropListData]="operaciones"
+             [cdkDropListConnectedTo]="[formulaListOperacion]"
+             class="example-list"
+             (cdkDropListDropped)="drop($event)">
+            <div class="example-box" 
+                 *ngFor="let operacion of operaciones" 
+                 cdkDrag
+                 [cdkDragDisabled]="operacion.disabled">{{ operacion.value }}</div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3">
+        <div class="example-container">
+            <h2>Lista</h2>
+            <div
+              cdkDropList
+              #doneList="cdkDropList"
+              [cdkDropListData]="secondList"
+              [cdkDropListConnectedTo]="[formulaListSegundo]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+                <div class="example-box" 
+                *ngFor="let item of secondList" 
+                cdkDrag
+                [cdkDragDisabled]="item.disabled">{{ item.value }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mt-5">
+        <button type="button" class="btn btn-primary btn-block btn-lg" (click)="calcular()">Calcular</button>
+        <button type="button" class="btn btn-warning btn-block btn-lg" (click)="limpiar()">Limpiar</button>
+    </div>
+</div>
